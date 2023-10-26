@@ -1,0 +1,48 @@
+# client_id: demo-client
+# client_secret: demo-secret
+# base64: ZGVtby1jbGllbnQ6ZGVtby1zZWNyZXQ=
+# 在线base64: https://c.runoob.com/front-end/693/
+
+### 查看oauth配置
+GET {{baseUrl}}/.well-known/oauth-authorization-server
+
+### 查看OpenID的配置
+GET {{baseUrl}}/.well-known/openid-configuration
+
+### jwks
+GET {{baseUrl}}/oauth2/jwks
+
+### 浏览器模式 - 浏览器
+http://127.0.0.1:7000/oauth2/authorize?response_type=code&client_id=demo-client&redirect_uri=https://baidu.com&scope=openid client.read client.create
+
+### 浏览器模式(方式一) - 授权码换取token
+POST {{baseUrl}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic ZGVtby1jbGllbnQ6ZGVtby1zZWNyZXQ=
+
+grant_type=authorization_code&redirect_uri=https://baidu.com&code=OHd9nQj4ykR3KqGSFk14dbCRx7ifO4Vu2R_SO5CEKvqFjd3FkKJRkfpW5IuLmj0gg8PXFc3oShRtTYqAs_Tzk9SaBnwGUFqvnqmFSljuawZKwjlVcmXflGRF0PJs3Q7B
+
+### 浏览器模式(方式二) - 授权码换取token
+POST {{baseUrl}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&redirect_uri=https://baidu.com&client_id=demo-client&client_secret=demo-secret&code=XmdmrulYday-0sxw0A1_5VBrWekozvFMzLECyG6rBV7G348Py453YOguQ5VKOilD4q2ihlEL_7_2fuKuatl5HaKf9YyTjr_3yHiiRlyGmsFO3Lf-rKixY2FoZ5rQnPSS
+
+### 获取用户
+GET {{baseUrl}}/userinfo
+Authorization: Bearer {{accessToken}}
+
+### 客户端模式
+POST {{baseUrl}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic ZGVtby1jbGllbnQ6ZGVtby1zZWNyZXQ=
+
+grant_type=client_credentials&scope=openid
+
+### 注销令牌
+POST {{baseUrl}}/oauth2/revoke
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic ZGVtby1jbGllbnQ6ZGVtby1zZWNyZXQ=
+
+token_type_hint=refresh_token&token=klA-i51s2hVbankpkg9kRh9jk1EIFJnwHhdAYHbS7LoW9YBwMRvqSShOL_8h_LgunSytWh-08JveyLedHfAUD8ovrTjled6i7HYIgwKQUSP18zUTCThs-HV8AeboTtfX
+

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form th:action="@{/login}" method="post">
+    <div>
+        异常信息：<span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION}"></span>
+    </div>
+    <input type="text" name="username" placeholder="用户名" /> <br/>
+    <input type="password" name="password" placeholder="密码" /> <br/>
+    <button type="submit">登录</button> <br/>
+</form>
+</body>
+</html>
